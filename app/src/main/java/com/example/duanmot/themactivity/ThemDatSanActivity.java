@@ -74,18 +74,19 @@ public class ThemDatSanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ModelDatSanBong datSanBong = new ModelDatSanBong(edtMaSan.getText().toString(),
-                        Integer.parseInt(edtSDT.getText().toString()),
+                       edtSDT.getText().toString(),
                         edtTen.getText().toString(),
                         edtNgayDat.getText().toString(),
                         loaiSan, edtgiovao.getText().toString(),
                         edtgiora.getText().toString(),
                         Integer.parseInt(tvSoTien.getText().toString()));
+
                 try {
                         if (CheckAddDat()>0){
                             if (daoDatSanBong.addDatSanBong(datSanBong)>0){
                                 Toast.makeText(ThemDatSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
                             }else {
-                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại \n Kiểm tra trùng Mã Loại Sân", Toast.LENGTH_SHORT).show();
                             }
                         }
                 }catch (Exception e){
@@ -214,9 +215,10 @@ public class ThemDatSanActivity extends AppCompatActivity {
 
     public int CheckAddDat() {
         int check = 1;
-        if (edtTen.getText().toString().length() == 0 ||edtNgayDat.getText().toString().length() == 0 || edtgiovao.getText().toString().length() == 0 || edtgiora.getText().toString().length() == 0 ||
-                edtMaSan.getText().toString().length() == 0 || edtSDT.getText().toString().length() == 0 ) {
-            Toast.makeText(ThemDatSanActivity.this, "Nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+        if (edtTen.getText().toString().length() == 0 ||edtNgayDat.getText().toString().length() == 0 ||
+                edtgiovao.getText().toString().length() == 0 || edtgiora.getText().toString().length() == 0 ||
+                edtMaSan.getText().toString().length() == 0 || edtSDT.getText().toString().length()==0) {
+            Toast.makeText(getApplicationContext(), "Nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return -1;
         }
         return check;

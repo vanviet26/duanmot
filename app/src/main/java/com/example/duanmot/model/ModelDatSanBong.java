@@ -2,7 +2,7 @@ package com.example.duanmot.model;
 
 public class ModelDatSanBong {
     private String mMaSan;
-    private int mSDT;
+    private String mSDT;
     private String mTen;
     private String mDate;
     private String mGioVao;
@@ -10,7 +10,7 @@ public class ModelDatSanBong {
     private int mGia;
     private String mLoaiSan;
 
-    public ModelDatSanBong(String mMaSan,int mSDT, String mTen, String mDate, String mLoaiSan, String mGioVao, String mGiora, int mGia) {
+    public ModelDatSanBong(String mMaSan,String mSDT, String mTen, String mDate, String mLoaiSan, String mGioVao, String mGiora, int mGia) {
         this.mMaSan= mMaSan;
         this.mSDT = mSDT;
         this.mTen = mTen;
@@ -21,6 +21,9 @@ public class ModelDatSanBong {
         this.mLoaiSan = mLoaiSan;
     }
 
+    public ModelDatSanBong() {
+    }
+
     public String getmMaSan() {
         return mMaSan;
     }
@@ -29,11 +32,11 @@ public class ModelDatSanBong {
         this.mMaSan = mMaSan;
     }
 
-    public int getmSDT() {
+    public String getmSDT() {
         return mSDT;
     }
 
-    public void setmSDT(int mSDT) {
+    public void setmSDT(String mSDT) {
         this.mSDT = mSDT;
     }
 

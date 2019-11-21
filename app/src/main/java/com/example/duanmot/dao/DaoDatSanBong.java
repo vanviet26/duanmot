@@ -11,7 +11,7 @@ public class DaoDatSanBong {
     SQLiteDatabase db;
     DataBaseHelper dataBaseHelper;
     public static final String TABLE_NAME = "datsanbong";
-    public static final String SQL_DATSANBONG = "CREATE TABLE datsanbong ( masan text primary key,sdt number , " +
+    public static final String SQL_DATSANBONG = "CREATE TABLE datsanbong ( masan text primary key,sdt integer , " +
             "ten text, ngay date, loaiSan text, " +
             "giovao text, giora text, giatien integer );";
 
