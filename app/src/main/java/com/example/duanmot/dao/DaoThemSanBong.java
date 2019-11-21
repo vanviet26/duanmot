@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,8 @@ import com.example.duanmot.model.ModelThemSanBong;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class DaoThemSanBong {
     private SQLiteDatabase db;
@@ -24,12 +27,18 @@ public class DaoThemSanBong {
         db = dbHelper.getWritableDatabase();
     }
 
-    public void addSanBong(ModelThemSanBong modelThemSanBong) {
+    public int addSanBong(ModelThemSanBong modelThemSanBong) {
         ContentValues values = new ContentValues();
         values.put("masan", modelThemSanBong.getmMaSanBong());
         values.put("loaisan", modelThemSanBong.getmLoaiSan());
-        db.insert(TABLE_NAME, null, values);
-        db.close();
+        try {
+            if (db.insert(TABLE_NAME, null, values) == -1) {
+                return -1;
+            }
+        } catch (Exception ex) {
+            Log.e(TAG, ex.toString());
+        }
+        return 1;
     }
 
     public List<ModelThemSanBong> getALLSanBong() {

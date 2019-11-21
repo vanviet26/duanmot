@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -72,7 +73,24 @@ public class ThemDatSanActivity extends AppCompatActivity {
         btnAddLichSan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDatSan();
+                ModelDatSanBong datSanBong = new ModelDatSanBong(edtMaSan.getText().toString(),
+                        Integer.parseInt(edtSDT.getText().toString()),
+                        edtTen.getText().toString(),
+                        edtNgayDat.getText().toString(),
+                        loaiSan, edtgiovao.getText().toString(),
+                        edtgiora.getText().toString(),
+                        Integer.parseInt(tvSoTien.getText().toString()));
+                try {
+                        if (CheckAddDat()>0){
+                            if (daoDatSanBong.addDatSanBong(datSanBong)>0){
+                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                }catch (Exception e){
+                    Log.d("Lỗi: ", e.toString());
+                }
             }
         });
         btnxoaTrang.setOnClickListener(new View.OnClickListener() {
@@ -194,29 +212,14 @@ public class ThemDatSanActivity extends AppCompatActivity {
         });
     }
 
-    public void addDatSan() {
-        String ten = edtTen.getText().toString();
-        String date = edtNgayDat.getText().toString();
-        String giovao = edtgiovao.getText().toString();
-        String giora = edtgiora.getText().toString();
-
-        String maloaisan = edtMaSan.getText().toString();
-        String sdt = edtSDT.getText().toString();
-        String gia = tvSoTien.getText().toString();
-        if (ten.length() == 0 || date.length() == 0 || giovao.length() == 0 || giora.length() == 0 ||
-                maloaisan.length() == 0 || sdt.length() == 0 || gia.length() == 0) {
-            Toast.makeText(ThemDatSanActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
-        } else {
-            ModelDatSanBong datSanBong = new ModelDatSanBong(maloaisan,
-                    Integer.parseInt(sdt),
-                    ten,
-                    date,
-                    loaiSan, giovao,
-                    giora,
-                    Integer.parseInt(gia));
-            daoDatSanBong.addDatSanBong(datSanBong);
-            Toast.makeText(ThemDatSanActivity.this, "Thêm  Thành Công", Toast.LENGTH_SHORT).show();
+    public int CheckAddDat() {
+        int check = 1;
+        if (edtTen.getText().toString().length() == 0 ||edtNgayDat.getText().toString().length() == 0 || edtgiovao.getText().toString().length() == 0 || edtgiora.getText().toString().length() == 0 ||
+                edtMaSan.getText().toString().length() == 0 || edtSDT.getText().toString().length() == 0 ) {
+            Toast.makeText(ThemDatSanActivity.this, "Nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+            return -1;
         }
+        return check;
     }
 
     @Override

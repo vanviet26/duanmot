@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ import com.example.duanmot.dao.DaoThemSanBong;
 import com.example.duanmot.listactivity.ListThemSan;
 import com.example.duanmot.model.ModelThemSanBong;
 
-public class ThemSanActivity extends AppCompatActivity  {
+public class ThemSanActivity extends AppCompatActivity {
     EditText edtMaSan, edtLoaiSan;
     Button btnThemSan, btnHuy;
     DaoThemSanBong daoThemSanBong;
@@ -34,7 +35,19 @@ public class ThemSanActivity extends AppCompatActivity  {
         btnThemSan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSan();
+                ModelThemSanBong modelThemSanBong = new ModelThemSanBong(edtMaSan.getText().toString(), edtLoaiSan.getText().toString());
+                try {
+                    if (checkAdd() > 0) {
+                        if (daoThemSanBong.addSanBong(modelThemSanBong) > 0) {
+                            Toast.makeText(ThemSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ThemSanActivity.this, "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.e("Lỗi: ", e.toString());
+                }
+
             }
         });
         btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -76,22 +89,13 @@ public class ThemSanActivity extends AppCompatActivity  {
     }
 
 
-    public void addSan(){
-        btnThemSan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String masan = edtMaSan.getText().toString();
-                String loaisan = edtLoaiSan.getText().toString();
-                if (masan.length() == 0 || loaisan.length() == 0) {
-                    Toast.makeText(ThemSanActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                } else {
-                    ModelThemSanBong modelThemSanBong = new ModelThemSanBong(masan, loaisan);
-                    daoThemSanBong.addSanBong(modelThemSanBong);
-                    Toast.makeText(ThemSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-
+    public int checkAdd() {
+        int check = 1;
+        if (edtLoaiSan.getText().toString().length() == 0 || edtMaSan.getText().toString().length() == 0) {
+            Toast.makeText(getApplicationContext(), "Điền đủ thông tin", Toast.LENGTH_SHORT).show();
+            return -1;
+        }
+        return check;
     }
+
 }
