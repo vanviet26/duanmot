@@ -40,6 +40,9 @@ public class UpdateThemSan extends AppCompatActivity {
            public void onClick(View v) {
                if (daoThemSanBong.updateSanBong(masan,edtLoaiSan.getText().toString())>0){
                    Toast.makeText(UpdateThemSan.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK,new Intent());
+                    finish();
+                    startActivity(new Intent(UpdateThemSan.this,ListThemSan.class));
                }
            }
        });

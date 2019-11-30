@@ -2,10 +2,14 @@ package com.example.duanmot.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duanmot.database.DataBaseHelper;
 import com.example.duanmot.model.ModelDatSanBong;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DaoDatSanBong {
     SQLiteDatabase db;
@@ -13,7 +17,7 @@ public class DaoDatSanBong {
     public static final String TABLE_NAME = "datsanbong";
     public static final String SQL_DATSANBONG = "CREATE TABLE datsanbong ( masan text primary key,sdt integer , " +
             "ten text, ngay date, loaiSan text, " +
-            "giovao text, giora text, giatien integer );";
+            "giovao time, giora time, giatien integer );";
 
     public DaoDatSanBong(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
@@ -38,6 +42,11 @@ public class DaoDatSanBong {
 
         }
         return 1;
+    }
+    public List<ModelDatSanBong> viewLichdat(){
+            List<ModelDatSanBong> modelDatSanBongs = new ArrayList<>();
+
+            return modelDatSanBongs;
     }
 
 }

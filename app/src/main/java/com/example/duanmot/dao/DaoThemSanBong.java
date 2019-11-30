@@ -20,7 +20,7 @@ public class DaoThemSanBong {
     private SQLiteDatabase db;
     private DataBaseHelper dbHelper;
     public static final String TABLE_NAME = "themsanbong";
-    public static final String SQL_THEMSANBONG = "CREATE TABLE themsanbong (masan primary key, loaisan text );";
+    public static final String SQL_THEMSANBONG = "CREATE TABLE themsanbong (mathemsan primary key, loaisan text );";
 
     public DaoThemSanBong(Context context) {
         dbHelper = new DataBaseHelper(context);
@@ -29,7 +29,7 @@ public class DaoThemSanBong {
 
     public int addSanBong(ModelThemSanBong modelThemSanBong) {
         ContentValues values = new ContentValues();
-        values.put("masan", modelThemSanBong.getmMaSanBong());
+        values.put("mathemsan", modelThemSanBong.getmMaSanBong());
         values.put("loaisan", modelThemSanBong.getmLoaiSan());
         try {
             if (db.insert(TABLE_NAME, null, values) == -1) {
@@ -54,25 +54,45 @@ public class DaoThemSanBong {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        db.close();
         return modelThemSanBongs;
     }
 
     public int updateSanBong(String maSanBong, String loaiSan) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("loaisan", loaiSan);
-        int result = db.update(TABLE_NAME, contentValues, "masan=?",
+        int result = db.update(TABLE_NAME, contentValues, "mathemsan=?",
                 new String[]{maSanBong});
         if (result == 0) {
             return -1;
         }
         return 1;
     }
+
     public int deleteSanBong(String maSanBong) {
-        int result = db.delete(TABLE_NAME, "masan=?", new String[]{maSanBong});
+        int result = db.delete(TABLE_NAME, "mathemsan=?", new String[]{maSanBong});
         if (result == 0) {
             return -1;
         }
         return 1;
+    }
+
+
+    public List<ModelThemSanBong> getSanByTime( String date,String input, String output) {
+        List<ModelThemSanBong> modelThemSanBongs = new ArrayList<>();
+        String sql = "SELECT themsanbong.mathemsan,themsanbong.loaisan FROM themsanbong \n" +
+                "INNER JOIN datsanbong on datsanbong.loaiSan=themsanbong.loaisan or datsanbong.loaiSan<>themsanbong.loaisan " +
+                "WHERE (ngay <> '"+date+"' or ngay == '"+date+"')  AND giovao <> '" + input + "'  AND giora <> '" + output + "' ";
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ModelThemSanBong modelThemSanBong = new ModelThemSanBong();
+                modelThemSanBong.setmMaSanBong(cursor.getString(0));
+                modelThemSanBong.setmLoaiSan(cursor.getString(1));
+                modelThemSanBongs.add(modelThemSanBong);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return modelThemSanBongs;
     }
 }
