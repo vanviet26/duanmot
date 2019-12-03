@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/image_item_datsan"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/image_item_datsan"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
 
 
         <TextView
@@ -30,41 +33,25 @@
             android:text="0934826442"
             android:textSize="16sp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/text_item_giosan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textview_item_datsan_sdt"
-            android:layout_toRightOf="@id/image_item_datsan"
-            android:orientation="horizontal">
+            android:layout_below="@+id/textview_item_datsan_sdt"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_item_datsan" />
 
-            <TextView
-                android:id="@+id/textview_item_datsan_giovao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/image_item_datsan"
-                android:text="03:08"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textview_item_datsan_giora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/image_item_datsan"
-                android:text="03:08"
-                android:textSize="16sp" />
-        </LinearLayout>
         <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/deleteuser"
             android:id="@+id/iamge_item_datsan_delte"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/deleteuser" />
     </RelativeLayout>
+    >
+
+</androidx.cardview.widget.CardView>
 
 

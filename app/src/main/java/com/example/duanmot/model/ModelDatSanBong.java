@@ -5,18 +5,16 @@ public class ModelDatSanBong {
     private String mSDT;
     private String mTen;
     private String mDate;
-    private String mGioVao;
-    private String mGiora;
+    private String mGioSan;
     private int mGia;
     private String mLoaiSan;
 
-    public ModelDatSanBong(String mMaSan,String mSDT, String mTen, String mDate, String mLoaiSan, String mGioVao, String mGiora, int mGia) {
-        this.mMaSan= mMaSan;
+    public ModelDatSanBong(String mMaSan, String mSDT, String mTen, String mDate,String mLoaiSan, String mGioSan, int mGia ) {
+        this.mMaSan = mMaSan;
         this.mSDT = mSDT;
         this.mTen = mTen;
         this.mDate = mDate;
-        this.mGioVao = mGioVao;
-        this.mGiora = mGiora;
+        this.mGioSan = mGioSan;
         this.mGia = mGia;
         this.mLoaiSan = mLoaiSan;
     }
@@ -56,20 +54,12 @@ public class ModelDatSanBong {
         this.mDate = mDate;
     }
 
-    public String getmGioVao() {
-        return mGioVao;
+    public String getmGioSan() {
+        return mGioSan;
     }
 
-    public void setmGioVao(String mGioVao) {
-        this.mGioVao = mGioVao;
-    }
-
-    public String getmGiora() {
-        return mGiora;
-    }
-
-    public void setmGiora(String mGiora) {
-        this.mGiora = mGiora;
+    public void setmGioSan(String mGioSan) {
+        this.mGioSan = mGioSan;
     }
 
     public int getmGia() {

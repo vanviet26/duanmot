@@ -37,7 +37,7 @@
         <ImageView
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/image_item_xoa"
+            android:id="@+id/image_item_xoa_themsan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

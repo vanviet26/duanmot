@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.duanmot.R;
 import com.example.duanmot.dao.DaoThemSanBong;
@@ -23,7 +22,7 @@ public class AdapterSanBong extends ArrayAdapter<ModelThemSanBong> {
     private int resource;
     private List<ModelThemSanBong> modellist;
     DaoThemSanBong daoThemSanBong;
-    public AdapterSanBong(@NonNull Context context, int resource, @NonNull List<ModelThemSanBong> objects) {
+    public AdapterSanBong(Context context, int resource,List<ModelThemSanBong> objects) {
         super(context, resource, objects);
         this.context =context;
         this.resource = resource;
@@ -32,7 +31,7 @@ public class AdapterSanBong extends ArrayAdapter<ModelThemSanBong> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView,  ViewGroup parent) {
         daoThemSanBong = new DaoThemSanBong(context);
         ViewHolder viewHolder;
         if (convertView==null){
@@ -41,7 +40,7 @@ public class AdapterSanBong extends ArrayAdapter<ModelThemSanBong> {
             viewHolder.imageView = convertView.findViewById(R.id.image_item_themsan);
             viewHolder.tvMaLoai = convertView.findViewById(R.id.textview_item_masan);
             viewHolder.tvLoaiSan = convertView.findViewById(R.id.textview_item_loaisan);
-            viewHolder.imageDelete  = convertView.findViewById(R.id.image_item_xoa);
+            viewHolder.imageDelete  = convertView.findViewById(R.id.image_item_xoa_themsan);
         convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -59,7 +58,6 @@ public class AdapterSanBong extends ArrayAdapter<ModelThemSanBong> {
                 modellist.remove(position);
                 Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
-
             }
         });
         return convertView;

@@ -31,16 +31,18 @@ import com.example.duanmot.model.ModelDatSanBong;
 import com.example.duanmot.model.ModelThemSanBong;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class ThemDatSanActivity extends AppCompatActivity {
-    EditText edtSDT, edtTen, edtNgayDat, edtgiovao, edtgiora, edtMaSan;
-    Button btnChon, btngiovao, btngiora, btnAddLichSan, btnxoaTrang;
+    EditText edtSDT, edtTen, edtNgayDat, edtMaSan;
+    Button btnChon, btnAddLichSan, btnxoaTrang;
     TextView tvSoTien;
-    Spinner spinnerLoaiSan;
+    Spinner spinnerLoaiSan, spinnerGioSan;
     List<ModelThemSanBong> listThemSan;
     String loaiSan = "";
+    String giosan = "";
     DaoDatSanBong daoDatSanBong;
 
     @Override
@@ -51,45 +53,33 @@ public class ThemDatSanActivity extends AppCompatActivity {
         getLoaiSan();
         daoDatSanBong = new DaoDatSanBong(ThemDatSanActivity.this);
         tvSoTien.setText("0");
-
+        getGioSan();
         btnChon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 datePicker();
             }
         });
-        btngiovao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timeToPicker();
-            }
-        });
-        btngiora.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timeOutPicker();
-            }
-        });
+
         btnAddLichSan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ModelDatSanBong datSanBong = new ModelDatSanBong(edtMaSan.getText().toString(),
-                       edtSDT.getText().toString(),
+                        edtSDT.getText().toString(),
                         edtTen.getText().toString(),
                         edtNgayDat.getText().toString(),
-                        loaiSan, edtgiovao.getText().toString(),
-                        edtgiora.getText().toString(),
+                        loaiSan,giosan,
                         Integer.parseInt(tvSoTien.getText().toString()));
 
                 try {
-                        if (CheckAddDat()>0){
-                            if (daoDatSanBong.addDatSanBong(datSanBong)>0){
-                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại \n Kiểm tra trùng Mã Loại Sân", Toast.LENGTH_SHORT).show();
-                            }
+                    if (CheckAddDat() > 0) {
+                        if (daoDatSanBong.addDatSanBong(datSanBong) > 0) {
+                            Toast.makeText(ThemDatSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại \n Kiểm tra trùng Mã Loại Sân", Toast.LENGTH_SHORT).show();
                         }
-                }catch (Exception e){
+                    }
+                } catch (Exception e) {
                     Log.d("Lỗi: ", e.toString());
                 }
             }
@@ -99,8 +89,6 @@ public class ThemDatSanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtMaSan.setText("");
                 edtNgayDat.setText("");
-                edtgiora.setText("");
-                edtgiovao.setText("");
                 edtSDT.setText("");
                 edtTen.setText("");
                 tvSoTien.setText("0");
@@ -117,13 +105,10 @@ public class ThemDatSanActivity extends AppCompatActivity {
         btnChon = findViewById(R.id.button_ngaydatsan);
         tvSoTien = findViewById(R.id.textview_tiensan);
         spinnerLoaiSan = findViewById(R.id.spinner_loaisan);
-        edtgiovao = findViewById(R.id.edt_giodensan);
-        edtgiora = findViewById(R.id.edt_gioroisan);
-        btngiora = findViewById(R.id.button_gioroisan);
-        btngiovao = findViewById(R.id.button_giodensan);
         btnAddLichSan = findViewById(R.id.button_thelichdatsan);
         btnxoaTrang = findViewById(R.id.button_xoatrang);
         edtMaSan = findViewById(R.id.edt_maloaisan);
+        spinnerGioSan = findViewById(R.id.spinner_giodatsan);
     }
 
     private void datePicker() {
@@ -140,58 +125,6 @@ public class ThemDatSanActivity extends AppCompatActivity {
             }
         }, nam, thang, ngay);
         datePickerDialog.show();
-    }
-
-    private void timeToPicker() {
-        final Calendar calendars = Calendar.getInstance();
-        final int gio = calendars.get(Calendar.HOUR_OF_DAY);
-        final int phut = calendars.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(ThemDatSanActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                SimpleDateFormat simpleDateFormats = new SimpleDateFormat("HH:mm");
-                calendars.set(0, 0, 0, hourOfDay, minute);
-                edtgiovao.setText(simpleDateFormats.format(calendars.getTime()));
-
-                String vao = edtgiovao.getText().toString();
-
-                if (vao.substring(0, 2).equals("06") || vao.substring(0, 2).equals("05") ||
-                        vao.subSequence(0, 2).equals("07") ||
-                        vao.substring(0, 2).equals("17")) {
-                    tvSoTien.setText("300000");
-                } else if (vao.substring(0, 2).equals("01") || vao.substring(0, 2).equals("00")
-                        || vao.substring(0, 2).equals("02") || vao.substring(0, 2).equals("03") || vao.substring(0, 2).equals("04")
-                ) {
-                    Toast.makeText(ThemDatSanActivity.this, "Đang Ngủ Không Rãnh", Toast.LENGTH_SHORT).show();
-                } else if (vao.substring(0, 2).equals("18") || vao.substring(0, 2).equals("19") ||
-                        vao.substring(0, 2).equals("20") || vao.substring(0, 2).equals("21")) {
-                    tvSoTien.setText("320000");
-                } else if (vao.substring(0, 2).equals("22") || vao.substring(0, 2).equals("23")) {
-                    tvSoTien.setText("350000");
-                } else if (vao.length() == 0) {
-                    tvSoTien.setText("0");
-                } else {
-                    tvSoTien.setText("250000");
-                }
-            }
-        }, gio, phut, true);
-        timePickerDialog.show();
-    }
-
-    private void timeOutPicker() {
-        final Calendar calendard = Calendar.getInstance();
-        final int gios = calendard.get(Calendar.HOUR_OF_DAY);
-        final int phuts = calendard.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(ThemDatSanActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                SimpleDateFormat simpleDateFormatd = new SimpleDateFormat("HH:mm");
-                calendard.set(0, 0, 0, hourOfDay, minute);
-                edtgiora.setText(simpleDateFormatd.format(calendard.getTime()));
-
-            }
-        }, gios, phuts, true);
-        timePickerDialog.show();
     }
 
     public void getLoaiSan() {
@@ -213,11 +146,55 @@ public class ThemDatSanActivity extends AppCompatActivity {
         });
     }
 
+    public void getGioSan() {
+        final ArrayList<String> arrayTime = new ArrayList<>();
+        arrayTime.add("6h-7h");
+        arrayTime.add("7h-8h");
+        arrayTime.add("8h-9h");
+        arrayTime.add("9h-10h");
+        arrayTime.add("10h-11h");
+        arrayTime.add("14h-15h");
+        arrayTime.add("15h-16h");
+        arrayTime.add("16h-17h");
+        arrayTime.add("17h-18h");
+        arrayTime.add("18h-19h");
+        arrayTime.add("19h-20h");
+        arrayTime.add("20h-21h");
+        arrayTime.add("21h-22h");
+        arrayTime.add("22h-23h");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrayTime);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGioSan.setAdapter(arrayAdapter);
+        spinnerGioSan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    giosan = arrayTime.get(position);
+                if (giosan.equalsIgnoreCase("6h-7h")
+                        ||giosan.equalsIgnoreCase("7h-8h")
+                        ||giosan.equalsIgnoreCase("16h-17h")){
+                    tvSoTien.setText("300000");
+                }else if (giosan.equalsIgnoreCase("14h-15h")
+                        ||giosan.equalsIgnoreCase("15h-16h")
+                        || giosan.equalsIgnoreCase("8h-9h")
+                        ||giosan.equalsIgnoreCase("9h-10h")
+                        || giosan.equalsIgnoreCase("10h-11h")){
+                    tvSoTien.setText("270000");
+                }else{
+                    tvSoTien.setText("330000");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     public int CheckAddDat() {
         int check = 1;
-        if (edtTen.getText().toString().length() == 0 ||edtNgayDat.getText().toString().length() == 0 ||
-                edtgiovao.getText().toString().length() == 0 || edtgiora.getText().toString().length() == 0 ||
-                edtMaSan.getText().toString().length() == 0 || edtSDT.getText().toString().length()==0) {
+        if (edtTen.getText().toString().length() == 0 || edtNgayDat.getText().toString().length() == 0 ||
+                edtMaSan.getText().toString().length() == 0 || edtSDT.getText().toString().length() == 0) {
             Toast.makeText(getApplicationContext(), "Nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return -1;
         }
@@ -235,10 +212,12 @@ public class ThemDatSanActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
-                startActivity(new Intent(ThemDatSanActivity.this, MainActivity.class));
+                setResult(RESULT_OK,new Intent(ThemDatSanActivity.this, MainActivity.class));
+               onBackPressed();
                 break;
             case R.id.menu_quayve:
-                startActivity(new Intent(ThemDatSanActivity.this, ListDatSan.class));
+                setResult(RESULT_OK, new Intent(ThemDatSanActivity.this, ListDatSan.class));
+                onBackPressed();
             default:
         }
         return super.onOptionsItemSelected(item);
