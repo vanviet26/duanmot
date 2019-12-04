@@ -41,6 +41,7 @@ public class ListDatSan extends AppCompatActivity {
     Button btnngay, btnCheck;
     EditText edtngay;
     List<ModelDatSanBong> modelDatSanBongs;
+    List<ModelDatSanBong> modelDatSanBong;
     List<ModelThemSanBong> listThemSan;
     AdapterViewSanTrong adapterViewSanTrong;
     Spinner spinnerLoaiSan;
@@ -75,13 +76,14 @@ public class ListDatSan extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ListDatSan.this, UpdateDatSan.class);
                 Bundle b = new Bundle();
-                b.putString("masan",modelDatSanBongs.get(position).getmMaSan());
-                b.putString("ten",modelDatSanBongs.get(position).getmTen());
-                b.putString("sdt",modelDatSanBongs.get(position).getmSDT());
-                b.putString("ngay",modelDatSanBongs.get(position).getmDate());
-                b.putString("loaisan",modelDatSanBongs.get(position).getmLoaiSan());
-                b.putString("gio",modelDatSanBongs.get(position).getmGioSan());
-                b.putInt("gia",modelDatSanBongs.get(position).getmGia());
+                modelDatSanBong = daoDatSanBong.viewAll();
+                b.putString("masan",modelDatSanBong.get(position).getmMaSan());
+                b.putString("ten",modelDatSanBong.get(position).getmTen());
+                b.putString("sdt",modelDatSanBong.get(position).getmSDT());
+                b.putString("ngay",modelDatSanBong.get(position).getmDate());
+                b.putString("loaisan",modelDatSanBong.get(position).getmLoaiSan());
+                b.putString("gio",modelDatSanBong.get(position).getmGioSan());
+                b.putInt("gia",modelDatSanBong.get(position).getmGia());
                 i.putExtras(b);
                 startActivity(i);
             }

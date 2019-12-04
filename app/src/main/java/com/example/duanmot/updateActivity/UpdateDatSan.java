@@ -33,13 +33,11 @@ import java.util.Calendar;
 import java.util.List;
 
 public class UpdateDatSan extends AppCompatActivity {
-    Spinner spinnerGio, spinnerLoaiSan;
+    Spinner spinnerGio;
     TextView tvGia;
-    Button btnNgay, btnCapNhat;
-    EditText edtSDT, edtTen, edtNgay;
-    List<ModelThemSanBong> listThemSan;
+    Button  btnCapNhat;
+    EditText edtSDT, edtTen;
     DaoDatSanBong daoDatSanBong;
-    String loaisan = "";
     String giosan = "";
 
     @Override
@@ -48,33 +46,22 @@ public class UpdateDatSan extends AppCompatActivity {
         setContentView(R.layout.activity_update_dat_san);
         initview();
         daoDatSanBong = new DaoDatSanBong(this);
-        getmLoaiSan();
         getGioSan();
-        btnNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePicks();
-            }
-        });
         Intent i = getIntent();
         Bundle c = i.getExtras();
         String masan = c.getString("masan");
         edtTen.setText(c.getString("ten"));
         edtSDT.setText(c.getString("sdt"));
-        edtNgay.setText(c.getString("ngay"));
+        c.getString("ngay");
         c.getString("loaisan");
         c.getString("gio");
     }
 
     private void initview() {
         spinnerGio = findViewById(R.id.spinner_updatedatsan_giodatsan);
-        spinnerLoaiSan = findViewById(R.id.spinner_updatedatsan_loaisan);
         tvGia = findViewById(R.id.textview_Updatedatsan_tiensan);
-        btnNgay = findViewById(R.id.button_updatedatsan_ngaydatsan);
-        edtNgay = findViewById(R.id.edt_updatedatsan_ngaydatsan);
         btnCapNhat = findViewById(R.id.button_updatethemsan_add);
         edtSDT = findViewById(R.id.edt_updatedatsan_sdt);
-        edtNgay = findViewById(R.id.edt_updatedatsan_ngaydatsan);
         edtTen = findViewById(R.id.edt_updatedatsan_ten);
 
     }
@@ -84,41 +71,6 @@ public class UpdateDatSan extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actionbar_home, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    public void datePicks() {
-        final Calendar calendar = Calendar.getInstance();
-        final int ngay = calendar.get(Calendar.DATE);
-        int thang = calendar.get(Calendar.MONTH);
-        int nam = calendar.get(Calendar.YEAR);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateDatSan.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(year, month, dayOfMonth);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                edtNgay.setText(simpleDateFormat.format(calendar.getTime()));
-            }
-        }, nam, thang, ngay);
-        datePickerDialog.show();
-    }
-
-    public void getmLoaiSan() {
-        DaoThemSanBong daoThemSanBong = new DaoThemSanBong(UpdateDatSan.this);
-        listThemSan = daoThemSanBong.getALLSanBong();
-        ArrayAdapter<ModelThemSanBong> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, listThemSan);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLoaiSan.setAdapter(dataAdapter);
-        spinnerLoaiSan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loaisan = listThemSan.get(spinnerLoaiSan.getSelectedItemPosition()).getmLoaiSan();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
     public void getGioSan() {

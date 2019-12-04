@@ -15,7 +15,7 @@ public class DaoDatSanBong {
     SQLiteDatabase db;
     DataBaseHelper dataBaseHelper;
     public static final String TABLE_NAME = "datsanbong";
-    public static final String SQL_DATSANBONG = "CREATE TABLE datsanbong ( masan text primary key,sdt integer , " +
+    public static final String SQL_DATSANBONG = "CREATE TABLE datsanbong ( masan text primary key,sdt text , " +
             "ten text, ngay date, loaiSan text, " +
             "gio time, giatien integer );";
 
@@ -81,5 +81,25 @@ public class DaoDatSanBong {
 
         return  listDatSanBong;
     }
+    public List<ModelDatSanBong> viewAll() {
+        List<ModelDatSanBong> listDatSanBong = new ArrayList<>();
+        String sql = "SELECT * from datsanbong ";
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ModelDatSanBong modelDatSanBong1 = new ModelDatSanBong();
+                modelDatSanBong1.setmMaSan(cursor.getString(0));
+                modelDatSanBong1.setmSDT(cursor.getString(1));
+                modelDatSanBong1.setmTen(cursor.getString(2));
+                modelDatSanBong1.setmDate(cursor.getString(3));
+                modelDatSanBong1.setmLoaiSan(cursor.getString(4));
+                modelDatSanBong1.setmGioSan(cursor.getString(5));
+                modelDatSanBong1.setmGia(Integer.parseInt(cursor.getString(6)));
+                listDatSanBong.add(modelDatSanBong1);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
 
+        return listDatSanBong;
+    }
 }
