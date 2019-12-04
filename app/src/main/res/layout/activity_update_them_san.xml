@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
         <Button
             android:text="Cập Nhật"
-            android:id="@+id/button_update_themsan"
+            android:id="@+id/button_updatethemsan_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

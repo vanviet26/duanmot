@@ -79,9 +79,13 @@ public class ThemSanActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
+                setResult(RESULT_OK,new Intent());
+                finish();
                 startActivity(new Intent(ThemSanActivity.this, MainActivity.class));
                 break;
             case R.id.menu_quayve:
+                setResult(RESULT_OK,new Intent());
+                finish();
                 startActivity(new Intent(ThemSanActivity.this, ListThemSan.class));
             default:
         }

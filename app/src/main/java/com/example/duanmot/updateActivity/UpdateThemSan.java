@@ -23,31 +23,34 @@ public class UpdateThemSan extends AppCompatActivity {
     EditText edtLoaiSan;
     Button btnCapNhat;
     DaoThemSanBong daoThemSanBong;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_them_san);
         edtLoaiSan = findViewById(R.id.edt_update_themsan);
-        btnCapNhat = findViewById(R.id.button_update_themsan);
+        btnCapNhat = findViewById(R.id.button_updatethemsan_add);
         daoThemSanBong = new DaoThemSanBong(UpdateThemSan.this);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-     String loaisan =b.getString("loaiSan");
-     edtLoaiSan.setText(loaisan);
-       final String masan = b.getString("maSan");
-       btnCapNhat.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               if (daoThemSanBong.updateSanBong(masan,edtLoaiSan.getText().toString())>0){
-                   Toast.makeText(UpdateThemSan.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
-                    setResult(RESULT_OK,new Intent());
+        String loaisan = b.getString("loaiSan");
+        edtLoaiSan.setText(loaisan);
+        final String masan = b.getString("maSan");
+        btnCapNhat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (daoThemSanBong.updateSanBong(masan, edtLoaiSan.getText().toString()) > 0) {
+                    Toast.makeText(UpdateThemSan.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK, new Intent());
                     finish();
-                    startActivity(new Intent(UpdateThemSan.this,ListThemSan.class));
-               }
-           }
-       });
+                    startActivity(new Intent(UpdateThemSan.this, ListThemSan.class));
+                }
+            }
+        });
 
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

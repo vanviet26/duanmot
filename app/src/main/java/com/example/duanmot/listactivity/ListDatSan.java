@@ -29,6 +29,7 @@ import com.example.duanmot.dao.DaoThemSanBong;
 import com.example.duanmot.model.ModelDatSanBong;
 import com.example.duanmot.model.ModelThemSanBong;
 import com.example.duanmot.themactivity.ThemDatSanActivity;
+import com.example.duanmot.updateActivity.UpdateDatSan;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,6 +70,22 @@ public class ListDatSan extends AppCompatActivity {
                 listView.setAdapter(adapterViewSanTrong);
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(ListDatSan.this, UpdateDatSan.class);
+                Bundle b = new Bundle();
+                b.putString("masan",modelDatSanBongs.get(position).getmMaSan());
+                b.putString("ten",modelDatSanBongs.get(position).getmTen());
+                b.putString("sdt",modelDatSanBongs.get(position).getmSDT());
+                b.putString("ngay",modelDatSanBongs.get(position).getmDate());
+                b.putString("loaisan",modelDatSanBongs.get(position).getmLoaiSan());
+                b.putString("gio",modelDatSanBongs.get(position).getmGioSan());
+                b.putInt("gia",modelDatSanBongs.get(position).getmGia());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
 
 
     }
@@ -101,6 +118,7 @@ public class ListDatSan extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 loaisan = listThemSan.get(spinnerLoaiSan.getSelectedItemPosition()).getmLoaiSan();
+
             }
 
             @Override
