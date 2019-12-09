@@ -99,7 +99,27 @@ public class DaoDatSanBong {
             } while (cursor.moveToNext());
         }
         cursor.close();
-
         return listDatSanBong;
+    }
+    public List<ModelDatSanBong> getMaSan(String masan){
+        List<ModelDatSanBong> ms = new ArrayList<>();
+         String sl = "SELECT * from datsanbong where masan = '"+masan+"' ";
+         Cursor c = db.rawQuery(sl,null);
+
+        if (c.moveToFirst()){
+            do {
+               ModelDatSanBong m = new ModelDatSanBong();
+                m.setmMaSan(c.getString(0));
+                m.setmSDT(c.getString(1));
+                m.setmTen(c.getString(2));
+                m.setmDate(c.getString(3));
+                m.setmLoaiSan(c.getString(4));
+                m.setmGioSan(c.getString(5));
+                m.setmGia(Integer.parseInt(c.getString(6)));
+                ms.add(m);
+            }while (c.moveToNext());
+        }
+
+        return ms;
     }
 }

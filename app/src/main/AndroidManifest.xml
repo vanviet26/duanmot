@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateActivity.UpdateDatSan"></activity>
+        <activity android:name=".updateActivity.UpdateDatSan" />
         <activity android:name=".updateActivity.UpdateThemSan" />
         <activity android:name=".themactivity.ThemDatSanActivity" />
         <activity android:name=".themactivity.ThemSanActivity" />

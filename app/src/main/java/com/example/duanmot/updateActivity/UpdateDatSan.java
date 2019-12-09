@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duanmot.MainActivity;
 import com.example.duanmot.R;
@@ -35,7 +36,7 @@ import java.util.List;
 public class UpdateDatSan extends AppCompatActivity {
     Spinner spinnerGio;
     TextView tvGia;
-    Button  btnCapNhat;
+    Button btnCapNhat;
     EditText edtSDT, edtTen;
     DaoDatSanBong daoDatSanBong;
     String giosan = "";
@@ -49,18 +50,29 @@ public class UpdateDatSan extends AppCompatActivity {
         getGioSan();
         Intent i = getIntent();
         Bundle c = i.getExtras();
-        String masan = c.getString("masan");
+        final String masan = c.getString("masan");
         edtTen.setText(c.getString("ten"));
         edtSDT.setText(c.getString("sdt"));
-        c.getString("ngay");
-        c.getString("loaisan");
-        c.getString("gio");
+        final String ngay = c.getString("ngay");
+        final String loaisan = c.getString("loaisan");
+        final int gia = c.getInt("gia");
+        btnCapNhat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (daoDatSanBong.updateDatSan(masan,edtSDT.getText().toString(),edtTen.getText().toString(),ngay,loaisan,giosan,gia)>0){
+                    Toast.makeText(UpdateDatSan.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK,new Intent());
+                    onBackPressed();
+                    startActivity(new Intent(UpdateDatSan.this,ListDatSan.class));
+                }
+            }
+        });
     }
 
     private void initview() {
         spinnerGio = findViewById(R.id.spinner_updatedatsan_giodatsan);
         tvGia = findViewById(R.id.textview_Updatedatsan_tiensan);
-        btnCapNhat = findViewById(R.id.button_updatethemsan_add);
+        btnCapNhat = findViewById(R.id.button_updatedatsan_thelichdatsan);
         edtSDT = findViewById(R.id.edt_updatedatsan_sdt);
         edtTen = findViewById(R.id.edt_updatedatsan_ten);
 

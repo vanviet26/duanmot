@@ -20,7 +20,7 @@ public class DaoThemSanBong {
     private SQLiteDatabase db;
     private DataBaseHelper dbHelper;
     public static final String TABLE_NAME = "themsanbong";
-    public static final String SQL_THEMSANBONG = "CREATE TABLE themsanbong (mathemsan primary key, loaisan text );";
+    public static final String SQL_THEMSANBONG = "CREATE TABLE themsanbong ( mathemsan primary key, loaisan text );";
 
     public DaoThemSanBong(Context context) {
         dbHelper = new DataBaseHelper(context);

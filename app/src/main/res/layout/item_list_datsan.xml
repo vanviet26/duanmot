@@ -34,12 +34,13 @@
             android:textSize="16sp" />
 
         <TextView
+            android:layout_alignParentEnd="true"
             android:id="@+id/text_item_giosan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_item_datsan_sdt"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/image_item_datsan" />
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/iamge_item_datsan_delte"
+            android:layout_alignParentRight="true" />
 
         <ImageView
             android:id="@+id/iamge_item_datsan_delte"
@@ -50,7 +51,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/deleteuser" />
     </RelativeLayout>
-    >
+
 
 </androidx.cardview.widget.CardView>
 

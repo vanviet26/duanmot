@@ -2,15 +2,17 @@ package com.example.duanmot;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.example.duanmot.listactivity.ListDatSan;
 import com.example.duanmot.listactivity.ListThemSan;
 import com.example.duanmot.listactivity.ListThongKe;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    CardView cvDatSan, cvThemSan, cvThongKe;
+    CardView cvDatSan, cvThemSan, cvThongKe, cvHoaDon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cvThemSan.setOnClickListener(this);
         cvDatSan.setOnClickListener(this);
         cvThongKe.setOnClickListener(this);
+        cvHoaDon.setOnClickListener(this);
 
     }
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cvDatSan = (CardView) findViewById(R.id.cardview_datsan);
         cvThemSan = (CardView) findViewById(R.id.cardview_themsan);
         cvThongKe = (CardView) findViewById(R.id.cardview_thongke);
+        cvHoaDon = (CardView)  findViewById(R.id.cardview_hoadon);
 
     }
 
@@ -42,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cardview_thongke:
                 startActivity(new Intent(MainActivity.this, ListThongKe.class));
+                break;
+            case R.id.cardview_hoadon:
+                startActivity(new Intent(MainActivity.this, ListHoaDon.class));
                 break;
             default:
         }
