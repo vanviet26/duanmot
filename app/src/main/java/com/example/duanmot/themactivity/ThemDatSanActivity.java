@@ -69,7 +69,7 @@ public class ThemDatSanActivity extends AppCompatActivity {
                         edtTen.getText().toString(),
                         edtNgayDat.getText().toString(),
                         loaiSan,giosan,
-                        Integer.parseInt(tvSoTien.getText().toString()));
+                        Integer.parseInt(tvSoTien.getText().toString()),0);
 
                 try {
                     if (CheckAddDat() > 0) {
@@ -94,6 +94,7 @@ public class ThemDatSanActivity extends AppCompatActivity {
                 tvSoTien.setText("0");
             }
         });
+        btnxoaTrang.isClickable();
 
 
     }
@@ -120,10 +121,10 @@ public class ThemDatSanActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(year, month, dayOfMonth);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 edtNgayDat.setText(simpleDateFormat.format(calendar.getTime()));
             }
-        }, nam, thang, ngay);
+        },nam,thang,ngay  );
         datePickerDialog.show();
     }
 
@@ -216,7 +217,8 @@ public class ThemDatSanActivity extends AppCompatActivity {
                onBackPressed();
                 break;
             case R.id.menu_quayve:
-                setResult(RESULT_OK, new Intent(ThemDatSanActivity.this, ListDatSan.class));
+                setResult(RESULT_OK, new Intent());
+                startActivity(new Intent(ThemDatSanActivity.this, ListDatSan.class));
                 onBackPressed();
             default:
         }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_item_showall"
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/image_item_showall"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_item_showall_ten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tên" />
+
+            <TextView
+                android:id="@+id/textview_item_showall_sdt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="sdt" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textview_item_showall_ngay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="ngày" />
+
+                <TextView
+                    android:id="@+id/textview_item_showall_gio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="ngày" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textview_item_showall_thanhtoan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_item_showall_delete"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="thanh toán" />
+
+
+        <ImageView
+            android:id="@+id/image_item_showall_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/deleteuser" />
+
+        <TextView
+            android:id="@+id/textview_item_showall_loaisan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_item_showall_thanhtoan"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="loaisan" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

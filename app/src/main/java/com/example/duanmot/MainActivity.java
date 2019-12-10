@@ -12,7 +12,7 @@ import com.example.duanmot.listactivity.ListThemSan;
 import com.example.duanmot.listactivity.ListThongKe;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    CardView cvDatSan, cvThemSan, cvThongKe, cvHoaDon;
+    CardView cvDatSan, cvThemSan, cvThongKe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cvThemSan.setOnClickListener(this);
         cvDatSan.setOnClickListener(this);
         cvThongKe.setOnClickListener(this);
-        cvHoaDon.setOnClickListener(this);
+
 
     }
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cvDatSan = (CardView) findViewById(R.id.cardview_datsan);
         cvThemSan = (CardView) findViewById(R.id.cardview_themsan);
         cvThongKe = (CardView) findViewById(R.id.cardview_thongke);
-        cvHoaDon = (CardView)  findViewById(R.id.cardview_hoadon);
+
 
     }
 
@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cardview_thongke:
                 startActivity(new Intent(MainActivity.this, ListThongKe.class));
                 break;
-            case R.id.cardview_hoadon:
-                startActivity(new Intent(MainActivity.this, ListHoaDon.class));
-                break;
+
             default:
         }
     }

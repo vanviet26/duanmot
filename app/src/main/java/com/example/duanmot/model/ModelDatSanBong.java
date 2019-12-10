@@ -8,8 +8,30 @@ public class ModelDatSanBong {
     private String mGioSan;
     private int mGia;
     private String mLoaiSan;
+    private int mThanhToan;
 
-    public ModelDatSanBong(String mMaSan, String mSDT, String mTen, String mDate,String mLoaiSan, String mGioSan, int mGia ) {
+    public int getmThanhToan() {
+        return mThanhToan;
+    }
+
+    public void setmThanhToan(int mThanhToan) {
+        this.mThanhToan = mThanhToan;
+    }
+
+    public ModelDatSanBong(String mMaSan, String mSDT, String mTen,
+                           String mDate, String mLoaiSan, String mGioSan,
+                           int mGia, int mThanhToan) {
+        this.mMaSan = mMaSan;
+        this.mSDT = mSDT;
+        this.mTen = mTen;
+        this.mDate = mDate;
+        this.mGioSan = mGioSan;
+        this.mGia = mGia;
+        this.mLoaiSan = mLoaiSan;
+        this.mThanhToan = mThanhToan;
+    }
+
+    public ModelDatSanBong(String mMaSan, String mSDT, String mTen, String mDate, String mLoaiSan, String mGioSan, int mGia ) {
         this.mMaSan = mMaSan;
         this.mSDT = mSDT;
         this.mTen = mTen;

@@ -13,10 +13,10 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_marginTop="10dp"
             android:id="@+id/edt_list_ngay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="8"
             android:enabled="false"
             android:textColor="@color/black" />
@@ -28,23 +28,36 @@
             android:layout_weight="2"
             android:text="Chọn Ngày" />
     </LinearLayout>
+
     <Spinner
         android:id="@+id/spinner_list_loaiSan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_gravity="center"
-        android:text="Xem"
-        android:id="@+id/button_checkview_san"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/button_checkview_san"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Xem" />
+        <Button
+            android:id="@+id/button_showall_datsan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Show All" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listview_datsan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

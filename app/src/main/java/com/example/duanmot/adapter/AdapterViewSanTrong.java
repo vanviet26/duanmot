@@ -40,6 +40,7 @@ public class AdapterViewSanTrong extends ArrayAdapter<ModelDatSanBong> {
             viewHolder.tvSDT = convertView.findViewById(R.id.textview_item_datsan_sdt);
             viewHolder.tvTime = convertView.findViewById(R.id.text_item_giosan);
             viewHolder.imageDelete  = convertView.findViewById(R.id.iamge_item_datsan_delte);
+            viewHolder.tvThanhToan = convertView.findViewById(R.id.textview_item_datsan_thanhtoan);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -51,6 +52,12 @@ public class AdapterViewSanTrong extends ArrayAdapter<ModelDatSanBong> {
         viewHolder.tvTime.setText(modelDatSanBong.getmGioSan());
         viewHolder.imageView.setImageResource(R.drawable.team);
         viewHolder.imageDelete.setImageResource(R.drawable.deleteuser);
+        if(modelDatSanBong.getmThanhToan() == 0){
+            viewHolder.tvThanhToan.setText("Chưa Thanh Toán");
+        }else {
+            viewHolder.tvThanhToan.setText("Đã Thanh Toán");
+        }
+
         viewHolder.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +70,7 @@ public class AdapterViewSanTrong extends ArrayAdapter<ModelDatSanBong> {
         return convertView;
     }
     public class ViewHolder{
-        private TextView tvTen,tvSDT,tvTime;
+        private TextView tvTen,tvSDT,tvTime,tvThanhToan;
         private ImageView imageView,imageDelete;
     }
 }

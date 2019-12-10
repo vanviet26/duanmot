@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.duanmot.MainActivity;
 import com.example.duanmot.R;
 import com.example.duanmot.adapter.AdapterSanBong;
+import com.example.duanmot.adapter.AdapterShowALL;
 import com.example.duanmot.adapter.AdapterViewSanTrong;
 import com.example.duanmot.dao.DaoDatSanBong;
 import com.example.duanmot.dao.DaoThemSanBong;
@@ -38,10 +39,11 @@ import java.util.List;
 
 public class ListDatSan extends AppCompatActivity {
     ListView listView;
-    Button btnngay, btnCheck;
+    Button btnngay, btnCheck, btnshowall;
     EditText edtngay;
     List<ModelDatSanBong> modelDatSanBongs;
-    List<ModelDatSanBong> modelDatSanBong;
+    List<ModelDatSanBong> modelbuffshow;
+    List<ModelDatSanBong> modelthanh;
     List<ModelThemSanBong> listThemSan;
     AdapterViewSanTrong adapterViewSanTrong;
     Spinner spinnerLoaiSan;
@@ -63,12 +65,48 @@ public class ListDatSan extends AppCompatActivity {
             }
         });
         getmLoaiSan();
+        modelDatSanBongs = daoDatSanBong.viewAll();
+        AdapterShowALL adapter = new AdapterShowALL(ListDatSan.this, modelDatSanBongs);
+        listView.setAdapter(adapter);
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modelDatSanBongs = daoDatSanBong.viewDatSan(edtngay.getText().toString(), loaisan);
-                adapterViewSanTrong = new AdapterViewSanTrong(ListDatSan.this, R.layout.item_list_datsan, modelDatSanBongs);
-                listView.setAdapter(adapterViewSanTrong);
+                if (edtngay.getText().toString().isEmpty()) {
+                    Toast.makeText(ListDatSan.this, "Nhập Ngày", Toast.LENGTH_SHORT).show();
+                } else {
+                    modelDatSanBongs = daoDatSanBong.viewDatSan(edtngay.getText().toString(), loaisan);
+                    adapterViewSanTrong = new AdapterViewSanTrong(ListDatSan.this, R.layout.item_list_datsan, modelDatSanBongs);
+                    listView.setAdapter(adapterViewSanTrong);
+                }
+            }
+        });
+
+        btnshowall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modelDatSanBongs = daoDatSanBong.viewAll();
+                AdapterShowALL adapter = new AdapterShowALL(ListDatSan.this, modelDatSanBongs);
+                listView.setAdapter(adapter);
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent c = new Intent(ListDatSan.this, ThanhToanList.class);
+                Bundle b = new Bundle();
+                modelthanh = daoDatSanBong.viewAll();
+                b.putString("masan", modelthanh.get(position).getmMaSan());
+                b.putString("ten", modelthanh.get(position).getmTen());
+                b.putString("sdt", modelthanh.get(position).getmSDT());
+                b.putString("ngay", modelthanh.get(position).getmDate());
+                b.putString("loaisan", modelthanh.get(position).getmLoaiSan());
+                b.putString("gio", modelthanh.get(position).getmGioSan());
+                b.putInt("giatien", modelthanh.get(position).getmGia());
+                b.putInt("thanhtoan", modelthanh.get(position).getmThanhToan());
+                c.putExtras(b);
+                startActivity(c);
+
+                return true;
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,14 +114,15 @@ public class ListDatSan extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ListDatSan.this, UpdateDatSan.class);
                 Bundle b = new Bundle();
-                modelDatSanBong = daoDatSanBong.viewAll();
-                b.putString("masan",modelDatSanBong.get(position).getmMaSan());
-                b.putString("ten",modelDatSanBong.get(position).getmTen());
-                b.putString("sdt",modelDatSanBong.get(position).getmSDT());
-                b.putString("ngay",modelDatSanBong.get(position).getmDate());
-                b.putString("loaisan",modelDatSanBong.get(position).getmLoaiSan());
-                b.putString("gio",modelDatSanBong.get(position).getmGioSan());
-                b.putInt("gia",modelDatSanBong.get(position).getmGia());
+                modelbuffshow = daoDatSanBong.viewAll();
+                b.putString("masan", modelbuffshow.get(position).getmMaSan());
+                b.putString("ten", modelbuffshow.get(position).getmTen());
+                b.putString("sdt", modelbuffshow.get(position).getmSDT());
+                b.putString("ngay", modelbuffshow.get(position).getmDate());
+                b.putString("loaisan", modelbuffshow.get(position).getmLoaiSan());
+                b.putString("gio", modelbuffshow.get(position).getmGioSan());
+                b.putInt("gia", modelbuffshow.get(position).getmGia());
+                b.putInt("thanhtoan", modelDatSanBongs.get(position).getmThanhToan());
                 i.putExtras(b);
                 startActivity(i);
             }
@@ -101,7 +140,7 @@ public class ListDatSan extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(year, month, dayOfMonth);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 edtngay.setText(simpleDateFormat.format(calendar.getTime()));
             }
         }, nam, thang, ngay);
@@ -155,7 +194,7 @@ public class ListDatSan extends AppCompatActivity {
         btnCheck = findViewById(R.id.button_checkview_san);
         btnngay = findViewById(R.id.button_list_ngay);
         listView = findViewById(R.id.listview_datsan);
-
+        btnshowall = findViewById(R.id.button_showall_datsan);
         spinnerLoaiSan = findViewById(R.id.spinner_list_loaiSan);
 
     }
