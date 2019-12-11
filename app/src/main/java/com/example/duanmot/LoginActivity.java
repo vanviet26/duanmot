@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 public class LoginActivity extends AppCompatActivity {
     public final String name_Shared_Preferenced = "khoanAdmin";
 
-    EditText edtTK,edtMK;
+    TextInputEditText edtTK,edtMK;
     Button btnDangNhap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        edtTK = findViewById(R.id.edit_taikhoan);
-        edtMK = findViewById(R.id.edit_matkhau);
-        btnDangNhap = findViewById(R.id.but_dangnhap);
+        edtTK = findViewById(R.id.textInputEditText);
+        edtMK = findViewById(R.id.textInputEditTexts);
+        btnDangNhap = findViewById(R.id.btn_singin);
     }
 }

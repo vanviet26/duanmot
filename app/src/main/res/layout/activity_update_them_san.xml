@@ -2,23 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".updateActivity.UpdateThemSan">
-<EditText
-    android:id="@+id/edt_update_themsan"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <EditText
+        android:id="@+id/edt_update_themsan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/edt_cus"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="Cập Nhật"
+            android:background="@drawable/bg_button_while"
             android:id="@+id/button_updatethemsan_add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Cập Nhật" />
 
     </LinearLayout>
 

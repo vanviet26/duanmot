@@ -6,13 +6,14 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.duanmot.listactivity.ListDatSan;
 import com.example.duanmot.listactivity.ListThemSan;
 import com.example.duanmot.listactivity.ListThongKe;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    CardView cvDatSan, cvThemSan, cvThongKe;
+    LinearLayout cvDatSan, cvThemSan, cvThongKe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        cvDatSan = (CardView) findViewById(R.id.cardview_datsan);
-        cvThemSan = (CardView) findViewById(R.id.cardview_themsan);
-        cvThongKe = (CardView) findViewById(R.id.cardview_thongke);
+        cvDatSan =  findViewById(R.id.linear_datsan);
+        cvThemSan =  findViewById(R.id.linear_themsan);
+        cvThongKe =  findViewById(R.id.linear_thongke);
 
 
     }
@@ -38,13 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.cardview_themsan:
+            case R.id.linear_themsan:
                 startActivity(new Intent(MainActivity.this, ListThemSan.class));
                 break;
-            case R.id.cardview_datsan:
+            case R.id.linear_datsan:
                 startActivity(new Intent(MainActivity.this, ListDatSan.class));
                 break;
-            case R.id.cardview_thongke:
+            case R.id.linear_thongke:
                 startActivity(new Intent(MainActivity.this, ListThongKe.class));
                 break;
 
