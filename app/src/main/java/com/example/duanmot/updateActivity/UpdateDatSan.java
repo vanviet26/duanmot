@@ -21,12 +21,15 @@ import android.widget.Toast;
 
 import com.example.duanmot.MainActivity;
 import com.example.duanmot.R;
+import com.example.duanmot.adapter.AdapterGioSan;
 import com.example.duanmot.dao.DaoDatSanBong;
 import com.example.duanmot.dao.DaoThemSanBong;
 import com.example.duanmot.listactivity.ListDatSan;
 import com.example.duanmot.listactivity.ListThemSan;
 import com.example.duanmot.model.ModelDatSanBong;
 import com.example.duanmot.model.ModelThemSanBong;
+import com.example.duanmot.model.Modelgio;
+import com.example.duanmot.themactivity.ThemDatSanActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class UpdateDatSan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_dat_san);
+        setTitle("Update Đặt Sân");
         initview();
         daoDatSanBong = new DaoDatSanBong(this);
         getGioSan();
@@ -59,11 +63,11 @@ public class UpdateDatSan extends AppCompatActivity {
         btnCapNhat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (daoDatSanBong.updateDatSan(masan,edtSDT.getText().toString(),edtTen.getText().toString(),ngay,loaisan,giosan,gia)>0){
+                if (daoDatSanBong.updateDatSan(masan, edtSDT.getText().toString(), edtTen.getText().toString(), ngay, loaisan, giosan, gia) > 0) {
                     Toast.makeText(UpdateDatSan.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
-                    setResult(RESULT_OK,new Intent());
+                    setResult(RESULT_OK, new Intent());
                     onBackPressed();
-                    startActivity(new Intent(UpdateDatSan.this,ListDatSan.class));
+                    startActivity(new Intent(UpdateDatSan.this, ListDatSan.class));
                 }
             }
         });
@@ -86,28 +90,28 @@ public class UpdateDatSan extends AppCompatActivity {
     }
 
     public void getGioSan() {
-        final ArrayList<String> arrayTime = new ArrayList<>();
-        arrayTime.add("6h-7h");
-        arrayTime.add("7h-8h");
-        arrayTime.add("8h-9h");
-        arrayTime.add("9h-10h");
-        arrayTime.add("10h-11h");
-        arrayTime.add("14h-15h");
-        arrayTime.add("15h-16h");
-        arrayTime.add("16h-17h");
-        arrayTime.add("17h-18h");
-        arrayTime.add("18h-19h");
-        arrayTime.add("19h-20h");
-        arrayTime.add("20h-21h");
-        arrayTime.add("21h-22h");
-        arrayTime.add("22h-23h");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTime);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final List<Modelgio> arrayTime = new ArrayList<>();
+        arrayTime.add(new Modelgio("6h-7h"));
+        arrayTime.add(new Modelgio("7h-8h"));
+        arrayTime.add(new Modelgio("8h-9h"));
+        arrayTime.add(new Modelgio("9h-10h"));
+        arrayTime.add(new Modelgio("10h-11h"));
+        arrayTime.add(new Modelgio("14h-15h"));
+        arrayTime.add(new Modelgio("15h-16h"));
+        arrayTime.add(new Modelgio("16h-17h"));
+        arrayTime.add(new Modelgio("17h-18h"));
+        arrayTime.add(new Modelgio("18h-19h"));
+        arrayTime.add(new Modelgio("19h-20h"));
+        arrayTime.add(new Modelgio("20h-21h"));
+        arrayTime.add(new Modelgio("21h-22h"));
+        arrayTime.add(new Modelgio("22h-23h"));
+        AdapterGioSan arrayAdapter = new AdapterGioSan(UpdateDatSan.this, arrayTime);
+
         spinnerGio.setAdapter(arrayAdapter);
         spinnerGio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                giosan = arrayTime.get(position);
+                giosan = String.valueOf(arrayTime.get(position));
                 if (giosan.equalsIgnoreCase("6h-7h")
                         || giosan.equalsIgnoreCase("7h-8h")
                         || giosan.equalsIgnoreCase("16h-17h")) {

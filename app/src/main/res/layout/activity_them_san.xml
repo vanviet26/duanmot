@@ -13,23 +13,30 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:background="@drawable/edt_cus"
+
         android:id="@+id/edt_maSan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mã Sân" />
 
     <EditText
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edt_cus"
         android:id="@+id/edt_loaiSan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Loại Sân" />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
+            android:background="@drawable/bg_button_while"
+
             android:layout_weight="1"
             android:id="@+id/btn_addsan"
             android:layout_width="match_parent"
@@ -37,10 +44,12 @@
             android:text="Thêm Sân" />
 
         <Button
+            android:background="@drawable/bg_button_while"
+
             android:layout_weight="1"
             android:id="@+id/btn_cancelSan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hủy" />
+            android:text="Xóa Trắng" />
     </LinearLayout>
 </LinearLayout>

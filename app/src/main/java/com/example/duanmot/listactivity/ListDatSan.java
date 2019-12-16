@@ -24,6 +24,7 @@ import com.example.duanmot.MainActivity;
 import com.example.duanmot.R;
 import com.example.duanmot.adapter.AdapterSanBong;
 import com.example.duanmot.adapter.AdapterShowALL;
+import com.example.duanmot.adapter.AdapterSpinnerLoaiSan;
 import com.example.duanmot.adapter.AdapterViewSanTrong;
 import com.example.duanmot.dao.DaoDatSanBong;
 import com.example.duanmot.dao.DaoThemSanBong;
@@ -56,6 +57,7 @@ public class ListDatSan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_dat_san);
+        setTitle("Main Đặt Sân");
         initView();
         daoDatSanBong = new DaoDatSanBong(ListDatSan.this);
         btnngay.setOnClickListener(new View.OnClickListener() {
@@ -151,9 +153,8 @@ public class ListDatSan extends AppCompatActivity {
     public void getmLoaiSan() {
         DaoThemSanBong daoThemSanBong = new DaoThemSanBong(ListDatSan.this);
         listThemSan = daoThemSanBong.getALLSanBong();
-        ArrayAdapter<ModelThemSanBong> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, listThemSan);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        AdapterSpinnerLoaiSan dataAdapter = new AdapterSpinnerLoaiSan(ListDatSan.this,
+                listThemSan);
         spinnerLoaiSan.setAdapter(dataAdapter);
         spinnerLoaiSan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

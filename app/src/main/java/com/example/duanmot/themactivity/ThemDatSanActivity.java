@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,16 +18,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.duanmot.MainActivity;
 import com.example.duanmot.R;
+import com.example.duanmot.adapter.AdapterGioSan;
+import com.example.duanmot.adapter.AdapterSpinnerLoaiSan;
 import com.example.duanmot.dao.DaoDatSanBong;
 import com.example.duanmot.dao.DaoThemSanBong;
 import com.example.duanmot.listactivity.ListDatSan;
 import com.example.duanmot.model.ModelDatSanBong;
 import com.example.duanmot.model.ModelThemSanBong;
+import com.example.duanmot.model.Modelgio;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ThemDatSanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_dat_san);
+        setTitle("Thêm Đặt Sân");
         initView();
         getLoaiSan();
         daoDatSanBong = new DaoDatSanBong(ThemDatSanActivity.this);
@@ -68,15 +70,15 @@ public class ThemDatSanActivity extends AppCompatActivity {
                         edtSDT.getText().toString(),
                         edtTen.getText().toString(),
                         edtNgayDat.getText().toString(),
-                        loaiSan,giosan,
-                        Integer.parseInt(tvSoTien.getText().toString()),0);
+                        loaiSan, giosan,
+                        Integer.parseInt(tvSoTien.getText().toString()), 0);
 
                 try {
                     if (CheckAddDat() > 0) {
                         if (daoDatSanBong.addDatSanBong(datSanBong) > 0) {
                             Toast.makeText(ThemDatSanActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(ThemDatSanActivity.this, "Thêm Thất Bại \n Kiểm tra trùng Mã Loại Sân", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ThemDatSanActivity.this, " Kiểm tra trùng Mã Loại Sân", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (Exception e) {
@@ -124,16 +126,14 @@ public class ThemDatSanActivity extends AppCompatActivity {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 edtNgayDat.setText(simpleDateFormat.format(calendar.getTime()));
             }
-        },nam,thang,ngay  );
+        }, nam, thang, ngay);
         datePickerDialog.show();
     }
 
     public void getLoaiSan() {
         DaoThemSanBong daoThemSanBong = new DaoThemSanBong(ThemDatSanActivity.this);
         listThemSan = daoThemSanBong.getALLSanBong();
-        ArrayAdapter<ModelThemSanBong> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, listThemSan);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        AdapterSpinnerLoaiSan dataAdapter = new AdapterSpinnerLoaiSan(ThemDatSanActivity.this, listThemSan);
         spinnerLoaiSan.setAdapter(dataAdapter);
         spinnerLoaiSan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -148,39 +148,39 @@ public class ThemDatSanActivity extends AppCompatActivity {
     }
 
     public void getGioSan() {
-        final ArrayList<String> arrayTime = new ArrayList<>();
-        arrayTime.add("6h-7h");
-        arrayTime.add("7h-8h");
-        arrayTime.add("8h-9h");
-        arrayTime.add("9h-10h");
-        arrayTime.add("10h-11h");
-        arrayTime.add("14h-15h");
-        arrayTime.add("15h-16h");
-        arrayTime.add("16h-17h");
-        arrayTime.add("17h-18h");
-        arrayTime.add("18h-19h");
-        arrayTime.add("19h-20h");
-        arrayTime.add("20h-21h");
-        arrayTime.add("21h-22h");
-        arrayTime.add("22h-23h");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrayTime);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final List<Modelgio> arrayTimes = new ArrayList<>();
+        arrayTimes.add(new Modelgio("6h-7h"));
+        arrayTimes.add(new Modelgio("7h-8h"));
+        arrayTimes.add(new Modelgio("8h-9h"));
+        arrayTimes.add(new Modelgio("9h-10h"));
+        arrayTimes.add(new Modelgio("10h-11h"));
+        arrayTimes.add(new Modelgio("14h-15h"));
+        arrayTimes.add(new Modelgio("15h-16h"));
+        arrayTimes.add(new Modelgio("16h-17h"));
+        arrayTimes.add(new Modelgio("17h-18h"));
+        arrayTimes.add(new Modelgio("18h-19h"));
+        arrayTimes.add(new Modelgio("19h-20h"));
+        arrayTimes.add(new Modelgio("20h-21h"));
+        arrayTimes.add(new Modelgio("21h-22h"));
+        arrayTimes.add(new Modelgio("22h-23h"));
+        AdapterGioSan arrayAdapter = new AdapterGioSan(ThemDatSanActivity.this, arrayTimes);
+
         spinnerGioSan.setAdapter(arrayAdapter);
         spinnerGioSan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    giosan = arrayTime.get(position);
+                giosan = String.valueOf(arrayTimes.get(position));
                 if (giosan.equalsIgnoreCase("6h-7h")
-                        ||giosan.equalsIgnoreCase("7h-8h")
-                        ||giosan.equalsIgnoreCase("16h-17h")){
+                        || giosan.equalsIgnoreCase("7h-8h")
+                        || giosan.equalsIgnoreCase("16h-17h")) {
                     tvSoTien.setText("300000");
-                }else if (giosan.equalsIgnoreCase("14h-15h")
-                        ||giosan.equalsIgnoreCase("15h-16h")
+                } else if (giosan.equalsIgnoreCase("14h-15h")
+                        || giosan.equalsIgnoreCase("15h-16h")
                         || giosan.equalsIgnoreCase("8h-9h")
-                        ||giosan.equalsIgnoreCase("9h-10h")
-                        || giosan.equalsIgnoreCase("10h-11h")){
+                        || giosan.equalsIgnoreCase("9h-10h")
+                        || giosan.equalsIgnoreCase("10h-11h")) {
                     tvSoTien.setText("270000");
-                }else{
+                } else {
                     tvSoTien.setText("330000");
                 }
             }
@@ -213,13 +213,12 @@ public class ThemDatSanActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
-                setResult(RESULT_OK,new Intent(ThemDatSanActivity.this, MainActivity.class));
-               onBackPressed();
+                setResult(RESULT_OK, new Intent());
+                startActivity(new Intent(ThemDatSanActivity.this, MainActivity.class));
                 break;
             case R.id.menu_quayve:
                 setResult(RESULT_OK, new Intent());
                 startActivity(new Intent(ThemDatSanActivity.this, ListDatSan.class));
-                onBackPressed();
             default:
         }
         return super.onOptionsItemSelected(item);

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".listactivity.ListDatSan">
 
     <LinearLayout
@@ -13,6 +14,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:background="@drawable/edt_cus"
             android:id="@+id/edt_list_ngay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +24,8 @@
             android:textColor="@color/black" />
 
         <Button
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_button_while"
             android:id="@+id/button_list_ngay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,22 +34,29 @@
     </LinearLayout>
 
     <Spinner
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_spinner"
         android:id="@+id/spinner_list_loaiSan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
+            android:background="@drawable/bg_button_while"
+            android:layout_marginLeft="10dp"
             android:id="@+id/button_checkview_san"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Xem" />
         <Button
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_button_while"
             android:id="@+id/button_showall_datsan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,6 +66,7 @@
     </LinearLayout>
 
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/listview_datsan"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

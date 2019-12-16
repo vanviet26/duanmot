@@ -28,6 +28,7 @@ public class UpdateThemSan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_them_san);
+        setTitle("Update Sân");
         edtLoaiSan = findViewById(R.id.edt_update_themsan);
         btnCapNhat = findViewById(R.id.button_updatethemsan_add);
         daoThemSanBong = new DaoThemSanBong(UpdateThemSan.this);

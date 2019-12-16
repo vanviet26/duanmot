@@ -29,6 +29,7 @@ public class ThemSanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_san);
+        setTitle("Thêm Sân");
         initView();
         daoThemSanBong = new DaoThemSanBong(this);
 

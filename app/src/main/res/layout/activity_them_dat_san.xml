@@ -10,6 +10,8 @@
 
 
     <EditText
+        android:background="@drawable/edt_cus"
+
         android:id="@+id/edt_maloaisan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +21,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:background="@drawable/edt_cus"
         android:maxLength="10"
         android:id="@+id/edt_sdt"
         android:layout_width="match_parent"
@@ -31,6 +34,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:background="@drawable/edt_cus"
         android:id="@+id/edt_ten"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +51,8 @@
         android:orientation="horizontal">
 
         <EditText
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edt_cus"
             android:hint="yyyy-MM-dd"
             android:id="@+id/edt_ngaydatsan"
             android:layout_width="match_parent"
@@ -64,6 +70,7 @@
     </LinearLayout>
 
     <Spinner
+        android:background="@drawable/custom_spinner"
         android:id="@+id/spinner_loaisan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,6 +78,7 @@
 
 
     <Spinner
+        android:background="@drawable/custom_spinner"
         android:id="@+id/spinner_giodatsan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +86,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-
+        android:background="@drawable/edt_cus"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
@@ -88,15 +96,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:gravity="center"
-            android:text="Tiền Sân Bóng:..."
+            android:text="Tiền Sân Bóng:"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+
+            android:text="sss"
             android:id="@+id/textview_tiensan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:inputType="number"
             android:paddingLeft="20sp"
             android:textColor="@color/black"
@@ -110,6 +120,8 @@
         android:orientation="horizontal">
 
         <Button
+            android:background="@drawable/bg_button_while"
+
             android:id="@+id/button_thelichdatsan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,6 +129,8 @@
             android:text="Thêm lịch" />
 
         <Button
+            android:background="@drawable/bg_button_while"
+
             android:id="@+id/button_xoatrang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

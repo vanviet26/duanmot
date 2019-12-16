@@ -7,13 +7,12 @@
     tools:context=".MainActivity">
 
 
-
     <View
-        android:layout_marginTop="16dp"
         android:id="@+id/image_u23"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bong" />
 
     <View
@@ -24,8 +23,9 @@
         android:background="@drawable/tam" />
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="200dp"
+        android:id="@+id/txxt"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:layout_below="@+id/image_u23"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
@@ -38,6 +38,9 @@
             android:textSize="20sp" />
 
         <LinearLayout
+            android:padding="10dp"
+            android:background="@drawable/linear_nen"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="3">
@@ -46,7 +49,6 @@
                 android:id="@+id/linear_themsan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -69,11 +71,11 @@
 
             <LinearLayout
                 android:id="@+id/linear_datsan"
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -100,11 +102,10 @@
 
             <LinearLayout
                 android:id="@+id/linear_thongke"
-                android:gravity="center"
-                android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"

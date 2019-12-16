@@ -184,4 +184,15 @@ public class DaoDatSanBong {
         }
         return t;
     }
+    public double chuaThanhToan() {
+        double t = 0;
+        String sqlie = "SELECT SUM(giatien) from datsanbong where strftime('%m',ngay) = strftime('%m','now') and thanhtoan = 0 ";
+        Cursor c = db.rawQuery(sqlie, null);
+        if (c.moveToFirst()) {
+            do {
+                t = c.getDouble(0);
+            } while (c.moveToNext());
+        }
+        return t;
+    }
 }

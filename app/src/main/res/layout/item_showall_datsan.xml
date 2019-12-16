@@ -60,6 +60,7 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginRight="10dp"
             android:id="@+id/textview_item_showall_thanhtoan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +71,7 @@
 
 
         <ImageView
+            android:layout_marginRight="10dp"
             android:id="@+id/image_item_showall_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,6 +81,7 @@
             android:background="@drawable/deleteuser" />
 
         <TextView
+            android:layout_marginRight="10dp"
             android:id="@+id/textview_item_showall_loaisan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

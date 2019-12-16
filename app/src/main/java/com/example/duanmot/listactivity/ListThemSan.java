@@ -32,6 +32,7 @@ public class ListThemSan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_them_san_bong);
+        setTitle("Main Thêm Sân");
         initView();
         daoThemSanBong = new DaoThemSanBong(ListThemSan.this);
         model = daoThemSanBong.getALLSanBong();
